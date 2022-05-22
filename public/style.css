@@ -186,8 +186,12 @@ footer {
 }
 
 @media (max-width: 600px) {
+    html, body {
+        height: fit-content;
+    }
     main {
         display: block;
+        height: 100%;
     }
     .main-controls, .main-output {
         margin-bottom: 1rem;
