@@ -1,5 +1,5 @@
 Not Bionic Reading
-Site source
+Site source for https://not-br.neocities.org/
 
 I haven't taken any time to actually pack any of this neatly, but if this helps you make an extension or anything that'd be sick.
 
