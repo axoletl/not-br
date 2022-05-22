@@ -1,5 +1,5 @@
 <!doctype html>
-<html class="theme-light" lang="en">
+<html id="root" class="theme-light" lang="en">
 
 <head>
     <meta charset="UTF-8">
@@ -65,7 +65,10 @@
             Include this code in your HTML:
             <div id="html-output" contenteditable="true"></div>
         </div>
-        <button id="toggle-display" class="toggle-display" onclick="switchDisplay()">See HTML</button>
+        <div class="fixed-controls">
+            <button id="toggle-theme" class="toggle-theme" onclick="switchTheme()">Dark Mode</button>
+            <button id="toggle-display" class="toggle-display" onclick="switchDisplay()">See HTML</button>
+        </div>
     </main>
     <footer>
         <p>Site source on <a href="https://github.com/axoletl/not-br" target="_blank">Github</a></p>

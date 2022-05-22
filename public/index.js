@@ -13,6 +13,8 @@ const cssOutput = document.getElementById('css-output')
 const htmlOutput = document.getElementById('html-output')
 
 const toggleDisplay = document.getElementById('toggle-display')
+const toggleTheme = document.getElementById('toggle-theme')
+const rootEl = document.getElementById('root')
 
 let parEl = document.createElement('DIV')
 parEl.classList.add('notbr-text')
@@ -30,6 +32,7 @@ let controls = {
     spacing: 0,
 }
 let displayHTML = false
+let pageTheme = 'light'
 
 inputText.addEventListener('input', update)
 inputFixation.addEventListener('input', update)
@@ -102,7 +105,7 @@ function switchDisplay(displayType) {
     } else {
         displayHTML = !displayHTML
     }
-    
+
     if (displayHTML) {
         mainOutput.style.display = 'none'
         codeOutput.style.display = 'flex'
@@ -111,6 +114,27 @@ function switchDisplay(displayType) {
         mainOutput.style.display = 'block'
         codeOutput.style.display = 'none'
         toggleDisplay.textContent = 'See HTML'
+    }
+}
+
+function switchTheme(themeType) {
+    if (themeType) {
+        pageTheme = themeType
+    } else {
+        if (pageTheme == 'light') {
+            pageTheme = 'dark'
+        } else {
+            pageTheme = 'light'
+        }
+    }
+    if (pageTheme == 'light') {
+        rootEl.classList.add('theme-light')
+        rootEl.classList.remove('theme-dark')
+        toggleTheme.textContent = 'Dark Mode'
+    } else {
+        rootEl.classList.add('theme-dark')
+        rootEl.classList.remove('theme-light')
+        toggleTheme.textContent = 'Light Mode'
     }
 }
 
