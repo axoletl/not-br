@@ -181,6 +181,10 @@ main {
     right: 1rem;
 }
 
+footer {
+    padding: 0 1rem 1rem;
+}
+
 @media (max-width: 600px) {
     main {
         display: block;
