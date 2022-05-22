@@ -1,0 +1,72 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="description" content="Tech bros are on another world just make a framework like the rest of us.">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Not BR</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="style.css" rel="stylesheet">
+</head>
+
+<body>
+    <header>
+        <h1>Not Bionic Reading</h1>
+        <h2>You guys are getting paid for this?</h2>
+    </header>
+    <main>
+        <div class="main-controls">
+            <div class="main-controls__row">
+                <div class="main-controls__control">
+                    <label for="input-text">Text to be converted</label>
+                    <textarea name="Text to be converted" id="input-text" cols="30" rows="7"></textarea>
+                </div>
+            </div>
+            <div class="main-controls__row">
+                <div class="main-controls__col">
+                    <div class="main-controls__control">
+                        <label for="input-fixation">(Not) Fixation</label>
+                        <input id="input-fixation" type="range" min="0" max="10">
+                    </div>
+                    <div class="main-controls__control">
+                        <label for="input-saccade">(Not) Saccade</label>
+                        <input id="input-saccade" type="range" min="0" max="10">
+                    </div>
+                    <div class="main-controls__control">
+                        <label for="input-opacity" for="">(Not) Opacity</label>
+                        <input id="input-opacity" type="range" min="0" max="100">
+                    </div>
+                </div>
+                <div class="main-controls__col">
+                    <div class="main-controls__control">
+                        <label for="input-size">Font Size</label>
+                        <input id="input-size" type="range" min="8" max="24">
+                    </div>
+                    <div class="main-controls__control">
+                        <label for="input-height">Line Height</label>
+                        <input id="input-height" type="range" min="16" max="48">
+                    </div>
+                    <div class="main-controls__control">
+                        <label for="input-spacing">Letter Spacing</label>
+                        <input id="input-spacing" type="range" min="0" max="16">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div id="main-output" class="main-output">
+
+        </div>
+        <div id="code-output" style="display: none;" class="code-output">
+            Include this code in your CSS file or &lt;style&gt; tag:
+            <div id="css-output" contenteditable="true"></div>
+            Include this code in your HTML:
+            <div id="html-output" contenteditable="true"></div>
+        </div>
+        <button id="toggle-display" class="toggle-display" onclick="switchDisplay()">See HTML</button>
+    </main>
+    <script src="index.js"></script>
+</body>
+</html>
