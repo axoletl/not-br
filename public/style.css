@@ -1,3 +1,17 @@
+.theme-light {
+    --color1: rgb(23, 23, 23);
+    --color2: rgb(245, 245, 245);
+}
+
+.theme-dark {
+    --color1: rgb(245, 245, 245);
+    --color2: rgb(23, 23, 23);
+}
+
+:root {
+    font-size: 16px;
+}
+
 * {
     margin: 0;
     padding: 0;
@@ -7,11 +21,7 @@
     font-family: 'Work Sans', sans-serif;
     font-weight: 400;
     line-height: 1.5rem;
-    color: rgb(23, 23, 23);
-}
-
-:root {
-    font-size: 16px;
+    color: var(--color1);
 }
 
 img {
@@ -23,12 +33,18 @@ input, textarea {
     width: 100%;
     resize: none;
     padding: 0.5rem;
+    border: 1px solid var(--color1);
     border-radius: 4px;
-    background: rgb(245, 245, 245);
+    background: var(--color2);
 }
 
 button {
     padding: 1rem;
+    background-color: var(--color2);
+    color: var(--color1);
+    border: 1px solid var(--color1);
+    border-radius: 4px;
+    box-shadow: none;
 }
 
 header {
@@ -56,7 +72,7 @@ body, html {
     align-items: flex-start;
     width: 100%;
     height: 100vh;
-    background: rgb(245, 245, 245);
+    background: var(--color2);
 }
 
 main {
@@ -80,7 +96,7 @@ main {
     max-width: 50rem;
     gap: 1rem;
     padding: 2rem;
-    border: 1px solid black;
+    border: 1px solid var(--color1);
     border-radius: 4px;
 }
 
@@ -113,7 +129,7 @@ main {
     min-height: 20rem;
     padding: 2rem;
     word-break: break-word;
-    border: 1px solid black;
+    border: 1px solid var(--color1);
     border-radius: 4px;
     overflow: auto;
 }
@@ -150,7 +166,7 @@ main {
     min-height: 20rem;
     padding: 2rem;
     word-break: break-word;
-    border: 1px solid black;
+    border: 1px solid var(--color1);
     border-radius: 4px;
     overflow: auto;
 }
@@ -158,7 +174,7 @@ main {
 .code-output > div {
     font-family: monospace;
     padding: 1rem;
-    border: 1px solid black;
+    border: 1px solid var(--color1);
     border-radius: 4px;
     font-size: 0.75rem;
     line-height: 1rem;
