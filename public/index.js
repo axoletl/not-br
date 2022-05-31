@@ -149,6 +149,9 @@ function copyAsMd(){
             if (i % saccadeFreq !== 0) {
                 return
             }
+			if (el.trim().length === 0) {
+				return;
+			}
             const fixPoint = Math.ceil(fixationPerc * el.length)
             output += `**${el.slice(0, fixPoint)}**${el.slice(fixPoint)} `
         })
