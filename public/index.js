@@ -138,6 +138,28 @@ function switchTheme(themeType) {
     }
 }
 
+function copyAsMd(){
+	let paras = textInput.split(/[\n]/gmiu)
+	let output = ''
+    paras.forEach((para, j) => {
+        let inputArray = para.split(/[ ]/gmiu)
+        const saccadeFreq = (parseInt(inputSaccade.max) + 1) - controls.saccade
+        const fixationPerc = controls.fixation / parseInt(inputFixation.max)
+        inputArray.forEach((el, i) => {
+            if (i % saccadeFreq !== 0) {
+                return
+            }
+			if (el.trim().length === 0) {
+				return;
+			}
+            const fixPoint = Math.ceil(fixationPerc * el.length)
+            output += `**${el.slice(0, fixPoint)}**${el.slice(fixPoint)} `
+        })
+		output += '\n'
+    })
+	navigator.clipboard.writeText(output);
+}
+
 //LIFECYCLE
 
 function init() {
