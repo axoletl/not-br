@@ -11,12 +11,16 @@ const inputWeight1 = document.getElementById('input-weight1')
 const inputWeight2 = document.getElementById('input-weight2')
 
 const mainOutput = document.getElementById('main-output')
-const codeOutput = document.getElementById('code-output')
+const htmlCssOutputCont = document.getElementById('html-css-output-cont')
 const cssOutput = document.getElementById('css-output')
 const htmlOutput = document.getElementById('html-output')
+const mdOutputCont = document.getElementById('md-output-cont')
+const mdOutput = document.getElementById('md-output')
 
 const toggleDisplayText = document.getElementById('toggle-display-text')
 const toggleDisplayHtml = document.getElementById('toggle-display-html')
+const toggleDisplayMd = document.getElementById('toggle-display-md')
+
 const toggleTheme = document.getElementById('toggle-theme')
 const rootEl = document.getElementById('root')
 
@@ -79,6 +83,37 @@ function updateCSS() {
 }
 
 function processText() {
+
+    let pHead = ''
+    let pTail = ''
+    let sHead = ''
+    let sTail = ''
+    switch (displayState) {
+        case 0: //main
+            pHead = '<p>'
+            pTail = '</p>'
+            sHead = '<span class="notbr-fixation">'
+            sTail = '</span>'
+            break;
+
+        case 1: //html
+            pHead = '<p>'
+            pTail = '</p>'
+            sHead = '<span class="notbr-fixation">'
+            sTail = '</span>'
+            break;
+
+        case 2: //md
+            pHead = ''
+            pTail = '\n'
+            sHead = '**'
+            sTail = '**'
+            break;
+
+        default:
+            break;
+    }
+
     let paras = textInput.split(/[\n]/gmiu)
     paras.forEach((para, j) => {
         let inputArray = para.split(/[ ]/gmiu)
@@ -88,16 +123,19 @@ function processText() {
             if (i % saccadeFreq !== 0) {
                 return
             }
+            if (el.trim().length === 0) {
+                return;
+            }
             const fixPoint = Math.ceil(fixationPerc * el.length)
-            const newStr = `<span class="notbr-fixation">${el.slice(0, fixPoint)}</span>${el.slice(fixPoint)}`
+            const newStr = `${sHead}${el.slice(0, fixPoint)}${sTail}${el.slice(fixPoint)}`
             inputArray[i] = newStr
         })
-        const initReduce = '<p>'
+        const initReduce = pHead
         const sumReduce = inputArray.reduce(
             (prev, curr) => prev + curr + ' ',
             initReduce
         )
-        paras[j] = `${sumReduce}</p>`
+        paras[j] = `${sumReduce}${pTail}`
     })
     const initReduce = ''
     const sumReduce = paras.reduce(
@@ -105,11 +143,27 @@ function processText() {
         initReduce
     )
     textOutput = sumReduce
+    bindOutput()
 }
 
 function bindOutput() {
-    parEl.innerHTML = textOutput
-    htmlOutput.textContent = mainOutput.innerHTML
+    switch (displayState) {
+        case 0: //main
+            parEl.innerHTML = textOutput
+            break;
+
+        case 1: //html
+            parEl.innerHTML = textOutput
+            htmlOutput.textContent = mainOutput.innerHTML
+            break;
+
+        case 2: //md
+            mdOutput.textContent = textOutput
+            break;
+
+        default:
+            break;
+    }
 }
 
 function switchDisplay(displayType) {
@@ -118,17 +172,31 @@ function switchDisplay(displayType) {
     //main
     if (displayState == 0) {
         mainOutput.style.display = 'block'
-        codeOutput.style.display = 'none'
-        toggleDisplayText.style.display = 'none'
-        toggleDisplayHtml.style.display = 'block'
+        htmlCssOutputCont.style.display = 'none'
+        mdOutputCont.style.display = 'none'
+        toggleDisplayText.disabled = true
+        toggleDisplayHtml.disabled = false
+        toggleDisplayMd.disabled = false
     }
     //html
     if (displayState == 1) {
         mainOutput.style.display = 'none'
-        codeOutput.style.display = 'flex'
-        toggleDisplayText.style.display = 'block'
-        toggleDisplayHtml.style.display = 'none'
-    } 
+        htmlCssOutputCont.style.display = 'flex'
+        mdOutputCont.style.display = 'none'
+        toggleDisplayText.disabled = false
+        toggleDisplayHtml.disabled = true
+        toggleDisplayMd.disabled = false
+    }
+    //md
+    if (displayState == 2) {
+        mainOutput.style.display = 'none'
+        htmlCssOutputCont.style.display = 'none'
+        mdOutputCont.style.display = 'block'
+        toggleDisplayText.disabled = false
+        toggleDisplayHtml.disabled = false
+        toggleDisplayMd.disabled = true
+    }
+    processText()
 }
 
 function switchTheme(themeType) {
@@ -144,35 +212,54 @@ function switchTheme(themeType) {
     if (pageTheme == 'light') {
         rootEl.classList.add('theme-light')
         rootEl.classList.remove('theme-dark')
-        toggleTheme.textContent = 'Dark Mode'
+        // toggleTheme.innerHTML = '🌙<span class="mobile-hide">Theme</span>'
+        toggleTheme.classList.add('light')
+        toggleTheme.classList.remove('dark')
     } else {
-        rootEl.classList.add('theme-dark')
         rootEl.classList.remove('theme-light')
-        toggleTheme.textContent = 'Light Mode'
+        rootEl.classList.add('theme-dark')
+        // toggleTheme.innerHTML = '🌞<span class="mobile-hide">Theme</span>'
+        toggleTheme.classList.add('dark')
+        toggleTheme.classList.remove('light')
     }
 }
 
-function copyAsMd(){
-	let paras = textInput.split(/[\n]/gmiu)
-	let output = ''
-    paras.forEach((para, j) => {
-        let inputArray = para.split(/[ ]/gmiu)
-        const saccadeFreq = (parseInt(inputSaccade.max) + 1) - controls.saccade
-        const fixationPerc = controls.fixation / parseInt(inputFixation.max)
-        inputArray.forEach((el, i) => {
-            if (i % saccadeFreq !== 0) {
-                return
-            }
-			if (el.trim().length === 0) {
-				return;
-			}
-            const fixPoint = Math.ceil(fixationPerc * el.length)
-            output += `**${el.slice(0, fixPoint)}**${el.slice(fixPoint)} `
-        })
-		output += '\n'
-    })
-	navigator.clipboard.writeText(output);
+function copyContent(target) {
+    const el = document.getElementById(target)
+    navigator.clipboard.writeText(el.textContent)
 }
+
+// function copyAsMd() {
+//     let paras = textInput.split(/[\n]/gmiu)
+//     paras.forEach((para, j) => {
+//         let inputArray = para.split(/[ ]/gmiu)
+//         const saccadeFreq = (parseInt(inputSaccade.max) + 1) - controls.saccade
+//         const fixationPerc = controls.fixation / parseInt(inputFixation.max)
+//         inputArray.forEach((el, i) => {
+//             if (i % saccadeFreq !== 0) {
+//                 return
+//             }
+//             if (el.trim().length === 0) {
+//                 return;
+//             }
+//             const fixPoint = Math.ceil(fixationPerc * el.length)
+//             const newStr = `**${el.slice(0, fixPoint)}**${el.slice(fixPoint)} `
+//             inputArray[i] = newStr
+//         })
+//         const initReduce = ''
+//         const sumReduce = inputArray.reduce(
+//             (prev, curr) => prev + curr + ' ',
+//             initReduce
+//         )
+//         paras[j] = `${sumReduce}`
+//     })
+//     const initReduce = ''
+//     const sumReduce = paras.reduce(
+//         (prev, curr) => prev + curr + '\n',
+//         initReduce
+//     )
+//     navigator.clipboard.writeText(sumReduce);
+// }
 
 //LIFECYCLE
 
@@ -188,6 +275,7 @@ function init() {
     inputSpacing.value = 0
     inputWeight1.value = 6
     inputWeight2.value = 3
+    toggleDisplayText.disabled = true
     bindControls()
     updateCSS()
     bindOutput()
@@ -199,5 +287,4 @@ function update() {
     bindControls()
     updateCSS()
     processText()
-    bindOutput()
 }

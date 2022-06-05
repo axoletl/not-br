@@ -74,20 +74,35 @@
         <div id="main-output" class="main-output" dir="auto">
 
         </div>
-        <div id="code-output" style="display: none;" class="code-output">
+        <div id="html-css-output-cont" style="display: none;" class="code-output">
             Include this code in your CSS file or &lt;style&gt; tag:
-            <div id="css-output" contenteditable="true"></div>
-            Include this code in your HTML:
-            <div id="html-output" contenteditable="true"></div>
-        </div>
-        <!-- <div id="md-output" style="display: block;" class="md-output">
+            <div>
+                <button class="copy-button" onclick="copyContent('css-output')">Copy CSS</button>
+                <div id="css-output" contenteditable="true"></div>
+            </div>
 
-        </div> -->
+            Include this code in your HTML:
+            <div>
+                <button class="copy-button" onclick="copyContent('html-output')">Copy HTML</button>
+                <div id="html-output" contenteditable="true"></div>
+            </div>
+        </div>
+        <div id="md-output-cont" style="display: none;" class="code-output">
+            <div>
+                <button class="copy-button" onclick="copyContent('md-output')">Copy Markdown</button>
+                <div id="md-output" contenteditable="true"></div>
+            </div>
+        </div>
+        <div class="fixed-controls top">
+            <button id="toggle-theme" class="toggle-theme light" onclick="switchTheme()"></button>
+        </div>
         <div class="fixed-controls">
-            <button id="toggle-theme" class="toggle-theme" onclick="switchTheme()">🌙Dark Mode</button>
-            <button id="toggle-display-text" class="toggle-display" style="display: none;" onclick="switchDisplay(0)">🅰See Text</button>
-            <button id="toggle-display-html" class="toggle-display" onclick="switchDisplay(1)">👩‍💻See HTML</button>
-            <button id="copy-md" class="copy-md" onclick="copyAsMd()">📝Copy as markdown</button>
+            <button id="toggle-display-text" class="toggle-display" onclick="switchDisplay(0)">🅰<span
+                    class="mobile-hide">Text</span></button>
+            <button id="toggle-display-html" class="toggle-display" onclick="switchDisplay(1)">👩‍💻<span
+                    class="mobile-hide">HTML</span></button>
+            <button id="toggle-display-md" class="toggle-display" onclick="switchDisplay(2)">📝<span
+                    class="mobile-hide">Markdown</span></button>
         </div>
     </main>
     <footer>

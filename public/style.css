@@ -1,11 +1,13 @@
 .theme-light {
     --color1: rgb(23, 23, 23);
     --color2: rgb(245, 245, 245);
+    --color3: rgb(151, 151, 151);
 }
 
 .theme-dark {
     --color1: rgb(245, 245, 245);
     --color2: rgb(23, 23, 23);
+    --color3: rgb(151, 151, 151);
 }
 
 :root {
@@ -56,9 +58,24 @@ button {
     transition: background-color 150ms, color 150ms;
 }
 
-button:hover {
+button:hover, button:disabled {
     background-color: var(--color1);
     color: var(--color2);
+}
+
+button:disabled {
+    color: var(--color3);
+    cursor: default;
+}
+
+.mobile-hide {
+    color: inherit;
+}
+
+.copy-button {
+    position: absolute;
+    top: -0.5rem;
+    left: -0.5rem;
 }
 
 header {
@@ -69,6 +86,7 @@ header {
 h1 {
     font-size: 2rem;
     font-weight: 700;
+    line-height: 2rem;
     font-style: italic;
     text-align: center;
     margin-bottom: 0.5rem;
@@ -111,9 +129,10 @@ main {
     height: 100%;
     max-width: 50rem;
     gap: 1rem;
-    padding: 1rem 2rem 2rem;
+    padding: 2rem;
     border: 1px solid var(--color1);
     border-radius: 4px;
+    overflow: auto;
 }
 
 .main-controls__row {
@@ -191,7 +210,7 @@ main {
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
-    gap: 1rem;
+    gap: 1.5rem;
     width: 100%;
     max-width: 50rem;
     height: 100%;
@@ -201,16 +220,6 @@ main {
     border: 1px solid var(--color1);
     border-radius: 4px;
     overflow: auto;
-}
-
-.code-output>div {
-    font-family: monospace;
-    padding: 1rem;
-    border: 1px solid var(--color1);
-    border-radius: 4px;
-    font-size: 0.75rem;
-    line-height: 1rem;
-    width: 100%;
 }
 
 .md-output {
@@ -225,12 +234,33 @@ main {
     overflow: auto;
 }
 
+.code-output>div, .md-output>div {
+    position: relative;
+    height: 100%;
+}
+
+#css-output, #html-output, #md-output {
+    font-family: monospace;
+    padding: 1rem;
+    padding-top: 2.5rem;
+    border: 1px solid var(--color1);
+    border-radius: 4px;
+    font-size: 0.75rem;
+    line-height: 1rem;
+    width: 100%;
+}
+
 #css-output {
     height: 8rem;
     overflow: auto;
 }
 
 #html-output {
+    height: 100%;
+    overflow: auto;
+}
+
+#md-output {
     height: 100%;
     overflow: auto;
 }
@@ -250,14 +280,75 @@ main {
     min-height: 5rem;
 }
 
+.fixed-controls.top {
+    top: 0;
+}
+
 .toggle-display {}
 
-.toggle-theme {}
+.toggle-theme {
+    position: relative;
+    width: 4rem;
+    height: 2.5rem;
+    border-radius: 12px;
+    overflow: hidden;
+}
 
-.copy-md {}
+.toggle-theme::after, .toggle-theme::before {
+    content: '';
+    position: absolute;
+    top: 4px;
+    left: 6px;
+    width: calc(50% - 8px);
+    height: calc(100% - 10px);
+    background-color: var(--color2);
+    border: 1px solid var(--color1);
+    border-radius: 8px;
+    transition: transform 150ms ease-in-out, background-color 100ms;
+}
+
+.toggle-theme::before {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1px;
+    background-color: transparent;
+    border: none;
+    content: '🌞';
+}
+
+.toggle-theme:hover::after, .toggle-theme:hover::before {
+    background-color: var(--color1);
+    border-color: var(--color2);
+}
+
+.toggle-theme:hover::before {
+    background-color: transparent;
+}
+
+.toggle-theme.light::after {
+    transform: translateX(0%);
+}
+
+.toggle-theme.light::before {
+    content: '🌞';
+    padding-left: 2px;
+    transform: translateX(100%);
+}
+
+.toggle-theme.dark::after {
+    transform: translateX(100%);
+}
+
+.toggle-theme.dark::before {
+    content: '🌙';
+    padding-right: 2px;
+    transform: translateX(0%);
+}
 
 footer {
-    padding: 0 1rem 1rem;
+    padding: 0 1rem 2rem;
 }
 
 @media (max-width: 600px) {
@@ -265,12 +356,36 @@ footer {
         height: fit-content;
     }
 
+    header {
+        padding: 1rem 5rem 0 1rem;
+    }
+
+    h1 {
+        text-align: left;
+    }
+
+    h2 {
+        text-align: left;
+    }
+
     main {
         display: block;
         height: 100%;
     }
 
+    button {
+        min-width: 3rem;
+    }
+
+    .mobile-hide {
+        display: none;
+    }
+
     .main-controls, .main-output {
         margin-bottom: 1rem;
+    }
+
+    footer {
+        padding: 0 1rem 6rem;
     }
 }
