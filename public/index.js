@@ -41,6 +41,14 @@ let controls = {
     weight1: 6,
     weight2: 3
 }
+let styles = {
+    opacity: '1.0',
+    size: '8px',
+    height: '8px',
+    spacing: '0px',
+    weight1: '700',
+    weight2: '400'
+}
 let displayHTML = false
 let displayState = 0 //0 main, 1 html, 2 md
 let pageTheme = 'light'
@@ -74,12 +82,18 @@ function bindControls() {
 }
 
 function updateCSS() {
-    parEl.style.setProperty('--fixation-opac', `${controls.opacity / parseInt(inputOpacity.max)}`)
-    parEl.style.setProperty('--fixation-size', `${controls.size}px`)
-    parEl.style.setProperty('--fixation-height', `${controls.height}px`)
-    parEl.style.setProperty('--fixation-spacing', `${controls.spacing}px`)
-    parEl.style.setProperty('--fixation-weight1', `${(parseInt(controls.weight1) + 1) * 100}`)
-    parEl.style.setProperty('--fixation-weight2', `${(parseInt(controls.weight2) + 1) * 100}`)
+    styles.opacity = `${controls.opacity / parseInt(inputOpacity.max)}`
+    styles.size = `${controls.size}px`
+    styles.height = `${parseInt(controls.size) + (parseInt(controls.height) * 6)}px`
+    styles.spacing = `${controls.spacing}px`
+    styles.weight1 = `${(parseInt(controls.weight1) + 1) * 100}`
+    styles.weight2 = `${(parseInt(controls.weight2) + 1) * 100}`
+    parEl.style.setProperty('--fixation-opac', styles.opacity)
+    parEl.style.setProperty('--fixation-size', styles.size)
+    parEl.style.setProperty('--fixation-height', styles.height)
+    parEl.style.setProperty('--fixation-spacing', styles.spacing)
+    parEl.style.setProperty('--fixation-weight1', styles.weight1)
+    parEl.style.setProperty('--fixation-weight2', styles.weight2)
 }
 
 function processText() {
