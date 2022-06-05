@@ -212,13 +212,11 @@ function switchTheme(themeType) {
     if (pageTheme == 'light') {
         rootEl.classList.add('theme-light')
         rootEl.classList.remove('theme-dark')
-        // toggleTheme.innerHTML = '🌙<span class="mobile-hide">Theme</span>'
         toggleTheme.classList.add('light')
         toggleTheme.classList.remove('dark')
     } else {
         rootEl.classList.remove('theme-light')
         rootEl.classList.add('theme-dark')
-        // toggleTheme.innerHTML = '🌞<span class="mobile-hide">Theme</span>'
         toggleTheme.classList.add('dark')
         toggleTheme.classList.remove('light')
     }
@@ -228,38 +226,6 @@ function copyContent(target) {
     const el = document.getElementById(target)
     navigator.clipboard.writeText(el.textContent)
 }
-
-// function copyAsMd() {
-//     let paras = textInput.split(/[\n]/gmiu)
-//     paras.forEach((para, j) => {
-//         let inputArray = para.split(/[ ]/gmiu)
-//         const saccadeFreq = (parseInt(inputSaccade.max) + 1) - controls.saccade
-//         const fixationPerc = controls.fixation / parseInt(inputFixation.max)
-//         inputArray.forEach((el, i) => {
-//             if (i % saccadeFreq !== 0) {
-//                 return
-//             }
-//             if (el.trim().length === 0) {
-//                 return;
-//             }
-//             const fixPoint = Math.ceil(fixationPerc * el.length)
-//             const newStr = `**${el.slice(0, fixPoint)}**${el.slice(fixPoint)} `
-//             inputArray[i] = newStr
-//         })
-//         const initReduce = ''
-//         const sumReduce = inputArray.reduce(
-//             (prev, curr) => prev + curr + ' ',
-//             initReduce
-//         )
-//         paras[j] = `${sumReduce}`
-//     })
-//     const initReduce = ''
-//     const sumReduce = paras.reduce(
-//         (prev, curr) => prev + curr + '\n',
-//         initReduce
-//     )
-//     navigator.clipboard.writeText(sumReduce);
-// }
 
 //LIFECYCLE
 
