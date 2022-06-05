@@ -8,22 +8,21 @@
     <title>Not BR</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:wght@100..900&display=swap" rel="stylesheet">
     <link href="style.css" rel="stylesheet">
 </head>
 
 <body>
     <header>
         <h1>Not Bionic Reading</h1>
-        <h2>You guys are getting paid for this?</h2>
-        <h3>Now testing as a Chrome extension! See <a href="https://github.com/axoletl/not-br-ext">here</a></h3>
+        <h2>Now testing as a Chrome extension! See <a href="https://github.com/axoletl/not-br-ext">here</a></h2>
     </header>
     <main>
         <div class="main-controls">
             <div class="main-controls__row">
                 <div class="main-controls__control">
                     <label for="input-text">Text to be converted</label>
-                    <textarea name="Text to be converted" id="input-text" cols="30" rows="7" dir="auto"></textarea>
+                    <textarea name="Text to be converted" id="input-text" cols="30" rows="5" dir="auto"></textarea>
                 </div>
             </div>
             <div class="main-controls__row">
@@ -56,6 +55,21 @@
                     </div>
                 </div>
             </div>
+            <div class="main-controls__linebreak"></div>
+            <div class="main-controls__row">
+                <div class="main-controls__col">
+                    <div class="main-controls__control">
+                        <label for="input-weight1" for="">Bold Weight</label>
+                        <input id="input-weight1" type="range" min="0" max="8">
+                    </div>
+                </div>
+                <div class="main-controls__col">
+                    <div class="main-controls__control">
+                        <label for="input-weight2" for="">Light Weight</label>
+                        <input id="input-weight2" type="range" min="0" max="8">
+                    </div>
+                </div>
+            </div>
         </div>
         <div id="main-output" class="main-output" dir="auto">
 
@@ -66,10 +80,14 @@
             Include this code in your HTML:
             <div id="html-output" contenteditable="true"></div>
         </div>
+        <!-- <div id="md-output" style="display: block;" class="md-output">
+
+        </div> -->
         <div class="fixed-controls">
-            <button id="toggle-theme" class="toggle-theme" onclick="switchTheme()">Dark Mode</button>
-            <button id="toggle-display" class="toggle-display" onclick="switchDisplay()">See HTML</button>
-            <button id="copy-md" class="copy-md" onclick="copyAsMd()">Copy as markdown</button>
+            <button id="toggle-theme" class="toggle-theme" onclick="switchTheme()">🌙Dark Mode</button>
+            <button id="toggle-display-text" class="toggle-display" style="display: none;" onclick="switchDisplay(0)">🅰See Text</button>
+            <button id="toggle-display-html" class="toggle-display" onclick="switchDisplay(1)">👩‍💻See HTML</button>
+            <button id="copy-md" class="copy-md" onclick="copyAsMd()">📝Copy as markdown</button>
         </div>
     </main>
     <footer>
@@ -77,4 +95,5 @@
     </footer>
     <script src="index.js"></script>
 </body>
+
 </html>

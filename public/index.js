@@ -7,19 +7,23 @@ const inputSize = document.getElementById('input-size')
 const inputHeight = document.getElementById('input-height')
 const inputSpacing = document.getElementById('input-spacing')
 
+const inputWeight1 = document.getElementById('input-weight1')
+const inputWeight2 = document.getElementById('input-weight2')
+
 const mainOutput = document.getElementById('main-output')
 const codeOutput = document.getElementById('code-output')
 const cssOutput = document.getElementById('css-output')
 const htmlOutput = document.getElementById('html-output')
 
-const toggleDisplay = document.getElementById('toggle-display')
+const toggleDisplayText = document.getElementById('toggle-display-text')
+const toggleDisplayHtml = document.getElementById('toggle-display-html')
 const toggleTheme = document.getElementById('toggle-theme')
 const rootEl = document.getElementById('root')
 
 let parEl = document.createElement('DIV')
 parEl.classList.add('notbr-text')
 
-const styleHeader = ".notbr-text { font-weight: 400; white-space: pre-wrap; font-size: var(--fixation-size); letter-spacing: var(--fixation-spacing); } .notbr-text p { line-height: var(--fixation-height); } .notbr-fixation { font-weight: 700; opacity: var(--fixation-opac); }"
+const styleHeader = ".notbr-text { white-space: pre-wrap; font-size: var(--fixation-size); letter-spacing: var(--fixation-spacing); } .notbr-text p { font-weight: var(--fixation-weight2); line-height: var(--fixation-height); } .notbr-fixation { font-weight: var(--fixation-weight1); opacity: var(--fixation-opac); }"
 
 let textInput = ''
 let textOutput = ''
@@ -30,8 +34,11 @@ let controls = {
     size: 8,
     height: 8,
     spacing: 0,
+    weight1: 6,
+    weight2: 3
 }
 let displayHTML = false
+let displayState = 0 //0 main, 1 html, 2 md
 let pageTheme = 'light'
 
 inputText.addEventListener('input', update)
@@ -41,6 +48,8 @@ inputOpacity.addEventListener('input', update)
 inputSize.addEventListener('input', update)
 inputHeight.addEventListener('input', update)
 inputSpacing.addEventListener('input', update)
+inputWeight1.addEventListener('input', update)
+inputWeight2.addEventListener('input', update)
 
 
 //"BINDS"
@@ -56,6 +65,8 @@ function bindControls() {
     controls.size = inputSize.value
     controls.height = inputHeight.value
     controls.spacing = inputSpacing.value
+    controls.weight1 = inputWeight1.value
+    controls.weight2 = inputWeight2.value
 }
 
 function updateCSS() {
@@ -63,6 +74,8 @@ function updateCSS() {
     parEl.style.setProperty('--fixation-size', `${controls.size}px`)
     parEl.style.setProperty('--fixation-height', `${controls.height}px`)
     parEl.style.setProperty('--fixation-spacing', `${controls.spacing}px`)
+    parEl.style.setProperty('--fixation-weight1', `${(parseInt(controls.weight1) + 1) * 100}`)
+    parEl.style.setProperty('--fixation-weight2', `${(parseInt(controls.weight2) + 1) * 100}`)
 }
 
 function processText() {
@@ -100,21 +113,22 @@ function bindOutput() {
 }
 
 function switchDisplay(displayType) {
-    if (displayType) {
-        displayHTML = displayType
-    } else {
-        displayHTML = !displayHTML
-    }
+    displayState = displayType
 
-    if (displayHTML) {
-        mainOutput.style.display = 'none'
-        codeOutput.style.display = 'flex'
-        toggleDisplay.textContent = 'See Text'
-    } else {
+    //main
+    if (displayState == 0) {
         mainOutput.style.display = 'block'
         codeOutput.style.display = 'none'
-        toggleDisplay.textContent = 'See HTML'
+        toggleDisplayText.style.display = 'none'
+        toggleDisplayHtml.style.display = 'block'
     }
+    //html
+    if (displayState == 1) {
+        mainOutput.style.display = 'none'
+        codeOutput.style.display = 'flex'
+        toggleDisplayText.style.display = 'block'
+        toggleDisplayHtml.style.display = 'none'
+    } 
 }
 
 function switchTheme(themeType) {
@@ -172,6 +186,8 @@ function init() {
     inputSize.value = 16
     inputHeight.value = 24
     inputSpacing.value = 0
+    inputWeight1.value = 6
+    inputWeight2.value = 3
     bindControls()
     updateCSS()
     bindOutput()

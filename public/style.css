@@ -39,6 +39,10 @@ input, textarea {
     transition: background-color 150ms;
 }
 
+input[type=”range”] {
+    padding: 0;
+}
+
 button {
     min-width: 6rem;
     padding: 0.5rem;
@@ -49,6 +53,12 @@ button {
     box-shadow: none;
     cursor: pointer;
     overflow-wrap: normal;
+    transition: background-color 150ms, color 150ms;
+}
+
+button:hover {
+    background-color: var(--color1);
+    color: var(--color2);
 }
 
 header {
@@ -101,7 +111,7 @@ main {
     height: 100%;
     max-width: 50rem;
     gap: 1rem;
-    padding: 2rem;
+    padding: 1rem 2rem 2rem;
     border: 1px solid var(--color1);
     border-radius: 4px;
 }
@@ -115,6 +125,22 @@ main {
     width: 100%;
 }
 
+.main-controls__linebreak {
+    position: relative;
+    width: 100%;
+}
+
+.main-controls__linebreak::after {
+    content: '';
+    position: absolute;
+    top: -50%;
+    left: 0;
+    height: 1px;
+    width: 100%;
+    opacity: 0.6;
+    background: var(--color1);
+}
+
 .main-controls__col {
     width: 100%;
 }
@@ -124,7 +150,7 @@ main {
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    gap: 0.5rem;
+    gap: 0rem;
     width: 100%;
 }
 
@@ -133,7 +159,7 @@ main {
     max-width: 50rem;
     height: 100%;
     min-height: 20rem;
-    padding: 2rem;
+    padding: 1rem 2rem 2rem;
     word-break: break-word;
     border: 1px solid var(--color1);
     border-radius: 4px;
@@ -143,18 +169,18 @@ main {
 /* EXPORT STYLES */
 
 .notbr-text {
-    font-weight: 400;
     white-space: pre-wrap;
     font-size: var(--fixation-size);
     letter-spacing: var(--fixation-spacing);
 }
 
 .notbr-text p {
+    font-weight: var(--fixation-weight2);
     line-height: var(--fixation-height);
 }
 
 .notbr-fixation {
-    font-weight: 700;
+    font-weight: var(--fixation-weight1);
     opacity: var(--fixation-opac);
 }
 
@@ -177,7 +203,7 @@ main {
     overflow: auto;
 }
 
-.code-output > div {
+.code-output>div {
     font-family: monospace;
     padding: 1rem;
     border: 1px solid var(--color1);
@@ -185,6 +211,18 @@ main {
     font-size: 0.75rem;
     line-height: 1rem;
     width: 100%;
+}
+
+.md-output {
+    width: 100%;
+    max-width: 50rem;
+    height: 100%;
+    min-height: 20rem;
+    padding: 2rem;
+    word-break: break-word;
+    border: 1px solid var(--color1);
+    border-radius: 4px;
+    overflow: auto;
 }
 
 #css-output {
@@ -212,17 +250,11 @@ main {
     min-height: 5rem;
 }
 
-.toggle-display {
+.toggle-display {}
 
-}
+.toggle-theme {}
 
-.toggle-theme {
-
-}
-
-.copy-md {
-	
-}
+.copy-md {}
 
 footer {
     padding: 0 1rem 1rem;
@@ -232,10 +264,12 @@ footer {
     html, body {
         height: fit-content;
     }
+
     main {
         display: block;
         height: 100%;
     }
+
     .main-controls, .main-output {
         margin-bottom: 1rem;
     }
