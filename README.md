@@ -6,3 +6,4 @@ This is a pretty basic plain HTML/CSS/JS page. Most of the text processing happe
 
 Contributions from:
 - [JulianusIV](https://github.com/JulianusIV)
+- [javad94](https://github.com/javad94)
