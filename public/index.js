@@ -102,6 +102,7 @@ function processText() {
     let pTail = ''
     let sHead = ''
     let sTail = ''
+    const processStyleHeader = `<div class="notbr-text" style="--fixation-opac: ${styles.opacity}; --fixation-size: ${styles.size}; --fixation-height: ${styles.height}; --fixation-spacing: ${styles.spacing}; --fixation-weight1: ${styles.weight1}; --fixation-weight2: ${styles.weight2};">`
     switch (displayState) {
         case 0: //main
             pHead = '<p>'
@@ -111,7 +112,7 @@ function processText() {
             break;
 
         case 1: //html
-            pHead = '<p>'
+            pHead = processStyleHeader + '<p>'
             pTail = '</p>'
             sHead = '<span class="notbr-fixation">'
             sTail = '</span>'
@@ -167,8 +168,7 @@ function bindOutput() {
             break;
 
         case 1: //html
-            parEl.innerHTML = textOutput
-            htmlOutput.textContent = mainOutput.innerHTML
+            htmlOutput.textContent = textOutput
             break;
 
         case 2: //md
