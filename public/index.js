@@ -205,7 +205,7 @@ function switchDisplay(displayType) {
     if (displayState == 2) {
         mainOutput.style.display = 'none'
         htmlCssOutputCont.style.display = 'none'
-        mdOutputCont.style.display = 'block'
+        mdOutputCont.style.display = 'flex'
         toggleDisplayText.disabled = false
         toggleDisplayHtml.disabled = false
         toggleDisplayMd.disabled = true

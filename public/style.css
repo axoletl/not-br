@@ -45,6 +45,10 @@ input[type=”range”] {
     padding: 0;
 }
 
+.label-margin {
+    margin-bottom: 0.5rem;
+}
+
 button {
     min-width: 6rem;
     padding: 0.5rem;
@@ -129,7 +133,7 @@ main {
     height: 100%;
     max-width: 50rem;
     gap: 1rem;
-    padding: 2rem;
+    padding: 1.5rem;
     border: 1px solid var(--color1);
     border-radius: 4px;
     overflow: auto;
@@ -178,7 +182,7 @@ main {
     max-width: 50rem;
     height: 100%;
     min-height: 20rem;
-    padding: 1rem 2rem 2rem;
+    padding: 1.5rem;
     word-break: break-word;
     border: 1px solid var(--color1);
     border-radius: 4px;
@@ -215,7 +219,7 @@ main {
     max-width: 50rem;
     height: 100%;
     min-height: 20rem;
-    padding: 2rem;
+    padding: 1.5rem;
     word-break: break-word;
     border: 1px solid var(--color1);
     border-radius: 4px;
@@ -237,6 +241,7 @@ main {
 .code-output>div, .md-output>div {
     position: relative;
     height: 100%;
+    width: 100%;
 }
 
 #css-output, #html-output, #md-output {

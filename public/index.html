@@ -8,20 +8,23 @@
     <title>Not BR</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&family=Work+Sans:wght@100..900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@100..900&family=Work+Sans:wght@100..900&display=swap"
+        rel="stylesheet">
     <link href="style.css" rel="stylesheet">
 </head>
 
 <body>
     <header>
         <h1>Not Bionic Reading</h1>
-        <h2><a href="https://github.com/axoletl/not-br-ext" target="_blank">Now testing as a Chrome(for now) extension!</a></h2>
+        <h2><a href="https://github.com/axoletl/not-br-ext" target="_blank">Now testing as a Chrome(for now)
+                extension!</a></h2>
     </header>
     <main>
         <div class="main-controls">
             <div class="main-controls__row">
                 <div class="main-controls__control">
-                    <label for="input-text">Text to be converted</label>
+                    <label for="input-text" class="label-margin">Text to be converted</label>
                     <textarea name="Text to be converted" id="input-text" cols="30" rows="5" dir="auto"></textarea>
                 </div>
             </div>
@@ -72,22 +75,24 @@
             </div>
         </div>
         <div id="main-output" class="main-output" dir="auto">
-
+            <p>🔠Converted text:</p>
         </div>
         <div id="html-css-output-cont" style="display: none;" class="code-output">
-            Include this code in your CSS file or &lt;style&gt; tag:
+            <p>👩‍💻Converted HTML/CSS:<br>Include this code in your CSS file or &lt;style&gt; tag:</p>
+
             <div>
                 <button class="copy-button" onclick="copyContent('css-output')">Copy CSS</button>
                 <div id="css-output" contenteditable="true"></div>
             </div>
 
-            Include this code in your HTML:
+            <p>Include this code in your HTML:</p>
             <div>
                 <button class="copy-button" onclick="copyContent('html-output')">Copy HTML</button>
                 <div id="html-output" contenteditable="true"></div>
             </div>
         </div>
         <div id="md-output-cont" style="display: none;" class="code-output">
+            <p>📝Converted Markdown</p>
             <div>
                 <button class="copy-button" onclick="copyContent('md-output')">Copy Markdown</button>
                 <div id="md-output" contenteditable="true"></div>
@@ -100,7 +105,7 @@
             <button id="toggle-display-text" class="toggle-display" onclick="switchDisplay(0)">🔠<span
                     class="mobile-hide">Text</span></button>
             <button id="toggle-display-html" class="toggle-display" onclick="switchDisplay(1)">👩‍💻<span
-                    class="mobile-hide">HTML</span></button>
+                    class="mobile-hide">HTML/CSS</span></button>
             <button id="toggle-display-md" class="toggle-display" onclick="switchDisplay(2)">📝<span
                     class="mobile-hide">Markdown</span></button>
         </div>
