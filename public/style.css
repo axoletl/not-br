@@ -386,7 +386,7 @@ footer {
         display: none;
     }
 
-    .main-controls, .main-output {
+    .main-controls, .main-output, .code-output {
         margin-bottom: 1rem;
     }
 

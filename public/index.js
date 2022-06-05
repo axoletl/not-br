@@ -52,6 +52,7 @@ let styles = {
 let displayHTML = false
 let displayState = 0 //0 main, 1 html, 2 md
 let pageTheme = 'light'
+let splitter = new GraphemeSplitter()
 
 inputText.addEventListener('input', update)
 inputFixation.addEventListener('input', update)
@@ -135,6 +136,7 @@ function processText() {
         const saccadeFreq = (parseInt(inputSaccade.max) + 1) - controls.saccade
         const fixationPerc = controls.fixation / parseInt(inputFixation.max)
         inputArray.forEach((el, i) => {
+            const charArray = splitter.splitGraphemes(el)
             if (i % saccadeFreq !== 0) {
                 return
             }
@@ -142,7 +144,11 @@ function processText() {
                 return;
             }
             const fixPoint = Math.ceil(fixationPerc * el.length)
-            const newStr = `${sHead}${el.slice(0, fixPoint)}${sTail}${el.slice(fixPoint)}`
+            let newStr = sHead
+            charArray.forEach((el,h) => {
+                newStr += el
+                if (h == fixPoint) newStr += sTail 
+            })
             inputArray[i] = newStr
         })
         const initReduce = pHead
