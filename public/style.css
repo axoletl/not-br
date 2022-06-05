@@ -67,6 +67,7 @@ h1 {
 h2 {
     font-style: italic;
     text-align: center;
+    margin-bottom: 0.5rem;
 }
 
 body, html {
