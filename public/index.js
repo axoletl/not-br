@@ -136,7 +136,8 @@ function processText() {
         const saccadeFreq = (parseInt(inputSaccade.max) + 1) - controls.saccade
         const fixationPerc = controls.fixation / parseInt(inputFixation.max)
         inputArray.forEach((el, i) => {
-            const charArray = splitter.splitGraphemes(el)
+            // const charArray = splitter.splitGraphemes(el)
+            const charArray = Array.from(el)
             if (i % saccadeFreq !== 0) {
                 return
             }
@@ -144,10 +145,11 @@ function processText() {
                 return;
             }
             const fixPoint = Math.ceil(fixationPerc * el.length)
+            charArray[fixPoint - 1] += sTail
             let newStr = sHead
             charArray.forEach((el,h) => {
                 newStr += el
-                if (h == fixPoint) newStr += sTail 
+            //     if (h == fixPoint) newStr += sTail 
             })
             inputArray[i] = newStr
         })
